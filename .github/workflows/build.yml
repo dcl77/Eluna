@@ -35,10 +35,13 @@ jobs:
       run: |
         sudo apt-get update && sudo apt-get install -yq libboost-all-dev g++-12 ccache
         sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-12 100 --slave /usr/bin/g++ g++ /usr/bin/g++-12
+        sudo update-alternatives --install /usr/bin/cc cc /usr/bin/gcc-12 100 --slave /usr/bin/c++ c++ /usr/bin/g++-12
     - name: Setup
       env:
         ELUNA: ${{ matrix.eluna }}
         LUA: ${{ matrix.lua }}
+        CC: /usr/bin/gcc-12
+        CXX: /usr/bin/g++-12
       run: |
         mkdir bin
         cd bin
