@@ -1,3 +1,14 @@
+# Enable ccache if available
+find_program(CCACHE_PROGRAM ccache)
+if(CCACHE_PROGRAM)
+  if(NOT CMAKE_C_COMPILER_LAUNCHER)
+    set(CMAKE_C_COMPILER_LAUNCHER "${CCACHE_PROGRAM}")
+  endif()
+  if(NOT CMAKE_CXX_COMPILER_LAUNCHER)
+    set(CMAKE_CXX_COMPILER_LAUNCHER "${CCACHE_PROGRAM}")
+  endif()
+endif()
+
 set(CUSTOM_METHODS_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/methods/Custom/CustomMethods.h")
 if(EXISTS "${CUSTOM_METHODS_HEADER}")
   if(NOT ${LUA_VERSION} MATCHES "luajit")
